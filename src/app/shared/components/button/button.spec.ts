@@ -17,10 +17,12 @@ describe('Button', () => {
     .compileComponents();
 
     fixture = TestBed.createComponent(Button);
+    fixture.componentRef.setInput('buttonText', 'Some text');
+
     buttonDe = fixture.debugElement.query(By.css('.button'));
     buttonTextSpan = fixture.nativeElement.querySelector('.button__text');
     buttonIconSpan = fixture.nativeElement.querySelector('.button__icon');
-    fixture.componentRef.setInput('buttonText', 'Some text');
+    
     component = fixture.componentInstance;
     
     fixture.detectChanges();
@@ -43,6 +45,7 @@ describe('Button', () => {
   });
 
   it('should render span with correct button text' , () => {
+    buttonTextSpan = fixture.nativeElement.querySelector('.button__text');
     expect(buttonTextSpan.textContent).toContain(component.buttonText());
   });
 
@@ -54,6 +57,19 @@ describe('Button', () => {
     fixture.componentRef.setInput('hasIcon', true);
     fixture.detectChanges();
     buttonIconSpan = fixture.nativeElement.querySelector('.button__icon');
+    expect(buttonIconSpan).toBeTruthy();
+  });
+
+  it ('should only render the icon span when iconOnly set to true', () => {
+    fixture.componentRef.setInput('hasIcon', true);
+    fixture.componentRef.setInput('iconOnly', true);
+
+    fixture.detectChanges();
+
+    buttonTextSpan = fixture.nativeElement.querySelector('.button__text');
+    buttonIconSpan = fixture.nativeElement.querySelector('.button__icon');
+
+    expect(buttonTextSpan).toBeNull();
     expect(buttonIconSpan).toBeTruthy();
   });
 
