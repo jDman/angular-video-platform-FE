@@ -1,0 +1,10 @@
+<button 
+  class="button"
+  [type]="buttonType()"
+  (pointerdown)="handleButtonClick($event)"
+>
+  <span class="button__text">{{ buttonText() }}</span>
+  @if (hasIcon()) {
+    <span class="button__icon"><ng-content /></span>
+  }
+</button>
