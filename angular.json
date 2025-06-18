@@ -87,6 +87,7 @@
                 "input": "public"
               }
             ],
+            "codeCoverage": true,
             "styles": [
               "src/styles.scss"
             ],
