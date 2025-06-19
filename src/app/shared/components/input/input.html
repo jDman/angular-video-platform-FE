@@ -1,0 +1,51 @@
+<div class="input">
+  @if (true) {
+    <label
+      class="input__label"
+      [for]="name()">
+        {{ labelText() }}
+    </label>
+  }
+
+  <input
+    class="input__field"
+    [ngClass]="(controlDir.touched) ?
+      (controlDir.invalid ? 'invalid' : 'valid') : null"
+    [formControl]="control"
+    [id]="id()"
+    [name]="name()"
+    [type]="inputType()"
+    [placeholder]="placeHolder()"
+    [minLength]="minLength()"
+    [maxLength]="maxLength()"
+    [hidden]="isHidden()"
+    [readOnly]="isReadOnly()"
+  />
+  @if (control.errors && control.touched) {
+    <div class="errors">
+      @if (control.errors['required']) {
+        <div class="error-message">
+          {{ labelText() }} is a required field. Please enter a value.
+        </div>
+      }
+
+      @if (control.errors['email'] ) {
+        <div class="error-message">
+          A valid email address is required.
+        </div>
+      }
+
+      @if (control.errors['minLength'] ) {
+        <div class="error-message">
+          Field must contain at least {{ minLength() }} characters.
+        </div>
+      }
+
+      @if (control.errors['maxLength'] ) {
+        <div class="error-message">
+          Field can only have a maximum of {{ maxLength() }} characters.
+        </div>
+      }
+    </div>
+  }
+</div>
